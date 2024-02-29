@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function saveMealPlan() {
+            var mondayBreakfast = {
+                name: document.getElementById('mondayBreakfastName').value,
+                image: document.getElementById('mondayBreakfastImage').value
+            };
+
+            // Similar structure for other meals and days
+
+            var mealPlan = {
+                mondayBreakfast: mondayBreakfast,
+                // Add other days as needed
+            };
+
+            localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
+            alert('Meal plan saved!');
+        }
+
+        function retrieveMealPlan() {
+            var savedMealPlan = localStorage.getItem('mealPlan');
+
+            if (savedMealPlan) {
+                var mealPlan = JSON.parse(savedMealPlan);
+
+                // Set values in the form
+                document.getElementById('mondayBreakfastName').value = mealPlan.mondayBreakfast.name;
+                document.getElementById('mondayBreakfastImage').value = mealPlan.mondayBreakfast.image;
+                // Set other days as needed
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h1>Weekly
+
