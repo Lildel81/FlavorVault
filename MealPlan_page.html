@@ -73,5 +73,30 @@
 </head>
 <body>
 
-<h1>Weekly
+<h1>Weekly Meal Planning</h1>
 
+<form>
+    <label for="mondayBreakfastName">Monday - Breakfast Name:</label>
+    <input type="text" id="mondayBreakfastName" name="mondayBreakfastName">
+
+    <label for="mondayBreakfastImage">Monday - Breakfast Image URL:</label>
+    <input type="text" id="mondayBreakfastImage" name="mondayBreakfastImage">
+    <img src="" alt="" id="mondayBreakfastPreview">
+
+    <!-- Repeat for other meals and days -->
+
+    <button type="button" onclick="saveMealPlan()">Save Meal Plan</button>
+    <button type="button" onclick="retrieveMealPlan()">Retrieve Meal Plan</button>
+</form>
+
+<script>
+    // Display image preview
+    document.getElementById('mondayBreakfastImage').addEventListener('input', function() {
+        var preview = document.getElementById('mondayBreakfastPreview');
+        preview.src = this.value;
+    });
+    // Similar setup for other meals and days
+</script>
+
+</body>
+</html>
