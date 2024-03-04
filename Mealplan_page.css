@@ -1,9 +1,13 @@
-body {
-    font-family: 'Arial', sans-serif;
+/* Reset some default styles */
+html, body {
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+}
+
+body {
+    font-family: 'Roboto Slab', serif;
     display: flex;
+    background-color: #f8f8f8;
 }
 
 #sidebar {
@@ -11,6 +15,9 @@ body {
     background-color: #333;
     color: #fff;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #main-content {
@@ -37,31 +44,80 @@ h1 {
     color: #333;
 }
 
-.meal-input {
-    width: calc(100% - 16px);
+.recipe-image {
+    display: none;
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.calorie-tracker {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.calorie-input {
+    width: 80%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.calories-display {
-    margin-top: 10px;
-    color: #333;
+.total-calories {
     font-weight: bold;
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
+
+/* Style for the button */
+.hover-button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    background-color: #3498db;
+    color: #fff;
+    border: 1px solid #3498db;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #45a049;
+/* Hover effect */
+.hover-button:hover {
+    background-color: #b9299c;
+    color: #fff;
 }
-jkj
+
+
