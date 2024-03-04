@@ -3,100 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meal Planning</title>
+    <title>Meal Plan</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            display: flex;
         }
-        form {
-            max-width: 600px;
-            margin: auto;
+
+        #sidebar {
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        label {
-            display: block;
-            margin-bottom: 8px;
+
+        #main-content {
+            flex-grow: 1;
+            padding: 20px;
         }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
+
+        h1 {
+            text-align: center;
+            color: #333;
         }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+
+        .day-container {
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        button:hover {
-            background-color: #45a049;
+
+        .day-heading {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
         }
-        img {
+
+        .recipe-image {
             max-width: 100%;
             height: auto;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .calorie-tracker {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .calorie-input {
+            width: 80%;
+            padding: 8px;
             margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .total-calories {
+            font-weight: bold;
         }
     </style>
     <script>
-        function saveMealPlan() {
-            var mondayBreakfast = {
-                name: document.getElementById('mondayBreakfastName').value,
-                image: document.getElementById('mondayBreakfastImage').value
-            };
+        function openModal(recipeName, imageUrl) {
+            var modal = document.getElementById('recipeModal');
+            var modalContent = document.getElementById('modalContent');
+            var recipeImage = document.getElementById('modalRecipeImage');
+            var recipeNameElement = document.getElementById('modalRecipeName');
 
-            // Similar structure for other meals and days
-
-            var mealPlan = {
-                mondayBreakfast: mondayBreakfast,
-                // Add other days as needed
-            };
-
-            localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
-            alert('Meal plan saved!');
+            modal.style.display = 'flex';
+            recipeImage.src = imageUrl;
+            recipeNameElement.innerText = recipeName;
         }
 
-        function retrieveMealPlan() {
-            var savedMealPlan = localStorage.getItem('mealPlan');
+        function closeModal() {
+            var modal = document.getElementById('recipeModal');
+            modal.style.display = 'none';
+        }
 
-            if (savedMealPlan) {
-                var mealPlan = JSON.parse(savedMealPlan);
+        function calculateCalories(day) {
+            var mealInputs = document.querySelectorAll('.day-' + day + ' .meal-input');
+            var totalCalories = 0;
 
-                // Set values in the form
-                document.getElementById('mondayBreakfastName').value = mealPlan.mondayBreakfast.name;
-                document.getElementById('mondayBreakfastImage').value = mealPlan.mondayBreakfast.image;
-                // Set other days as needed
-            }
+            mealInputs.forEach(function (input) {
+                var calories = parseInt(input.value) || 0;
+                totalCalories += calories;
+            });
+
+            document.getElementById('calories-' + day).innerText = 'Total Calories: ' + totalCalories;
+        }
+
+        function updateTotalCalories() {
+            var calorieInputs = document.querySelectorAll('.calorie-input');
+            var totalCalories = 0;
+
+            calorieInputs.forEach(function (input) {
+                var calories = parseInt(input.value) || 0;
+                totalCalories += calories;
+            });
+
+            document.getElementById('totalCalories').innerText = 'Total Calories: ' + totalCalories;
         }
     </script>
 </head>
 <body>
 
-<h1>Weekly Meal Planning</h1>
+<div id="sidebar">
+    <h2>Calories Counter</h2>
+    <div class="calorie-tracker">
+        <label for="calorieInput">Daily Calories:</label>
+        <input type="number" id="calorieInput" class="calorie-input" placeholder="Enter calories" oninput="updateTotalCalories()">
+    </div>
+    <p id="totalCalories" class="total-calories">Total Calories: 0</p>
+</div>
 
-<form>
-    <label for="mondayBreakfastName">Monday - Breakfast Name:</label>
-    <input type="text" id="mondayBreakfastName" name="mondayBreakfastName">
+<div id="main-content">
+    <h1>Weekly Meal Plan</h1>
 
-    <label for="mondayBreakfastImage">Monday - Breakfast Image URL:</label>
-    <input type="text" id="mondayBreakfastImage" name="mondayBreakfastImage">
-    <img src="" alt="" id="mondayBreakfastPreview">
+    <div class="day-container day-Monday">
+        <h3 class="day-heading">Monday - <span id="date-Monday"></span></h3>
+        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
+    </div>
 
-    <!-- Repeat for other meals and days -->
+    <div class="day-container day-Tuesday">
+        <h3 class="day-heading">Tuesday - <span id="date-Tuesday"></span></h3>
+        <img src="recipe_image_url_tuesday.jpg" alt="Tuesday Recipe" class="recipe-image" onclick="openModal('Tuesday Recipe', 'recipe_image_url_tuesday.jpg')">
+    </div>
 
-    <button type="button" onclick="saveMealPlan()">Save Meal Plan</button>
-    <button type="button" onclick="retrieveMealPlan()">Retrieve Meal Plan</button>
-</form>
+    <!-- Repeat for other days -->
+
+    <div class="modal" id="recipeModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalRecipeName"></h2>
+            <img id="modalRecipeImage" alt="Recipe Image">
+            <!-- Additional recipe details can be added here -->
+        </div>
+    </div>
+</div>
 
 <script>
-    // Display image preview
-    document.getElementById('mondayBreakfastImage').addEventListener('input', function() {
-        var preview = document.getElementById('mondayBreakfastPreview');
-        preview.src = this.value;
-    });
-    // Similar setup for other meals and days
-</script>
+    function formatDate(date) {            var options = { weekday: 'long', month: 'long', day: 'numeric' };
+        return new Date(date).toLocaleDateString('en-US', options);
+    }
 
+    // Set the current date for each day
+    document.getElementById('date-Monday').innerText = formatDate(new Date());
+    document.getElementById('date-Tuesday').innerText = formatDate(new Date().getTime() + (1 * 24 * 60 * 60 * 1000)); // Adding 1 day
+    // Repeat for other days
+
+    function updateTotalCalories() {
+        var calorieInputs = document.querySelectorAll('.calorie-input');
+        var totalCalories = 0;
+
+        calorieInputs.forEach(function (input) {
+            var calories = parseInt(input.value) || 0;
+            totalCalories += calories;
+        });
+
+        document.getElementById('totalCalories').innerText = 'Total Calories: ' + totalCalories;
+    }
+</script>
 </body>
 </html>
+
