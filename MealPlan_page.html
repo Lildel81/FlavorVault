@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Mealplan_page.css" >
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <title>Meal Plan</title>
+
     <style>
         body
         {
@@ -105,6 +106,7 @@
         .total-calories {
             font-weight: bold;
         }
+
     </style>
     <script>
         function openModal(recipeName, imageUrl) {
@@ -148,22 +150,42 @@
         }
     </script>
 </head>
-<body>
 
-<div id="sidebar">
+<!-- <body><div id="sidebar">
     <h2>Calories Counter</h2>
     <div class="calorie-tracker">
         <label for="calorieInput">Daily Calories:</label>
         <input type="number" id="calorieInput" class="calorie-input" placeholder="Enter calories" oninput="updateTotalCalories()">
     </div>
     <p id="totalCalories" class="total-calories">Total Calories: 0</p>
-</div>
+</div> -->
 
 <div id="main-content">
-    <h1>Meal Plan</h1>
+    <h1>Flavor Vault</h1>
+
+    <div class="Navigation"
+    id="sidebar
+">
+
+
+        <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">My Stuff</a></li>
+            <li><a href="#">Recipes</a></li>
+        </ul>
+    </nav>
+
+    </div>
+
+
+
+
+
+
 
     <div class="day-container day-Monday">
-        <h3 class="day-heading">Monday - <span id="date-Monday"></span></h3>
+        <h3 class="day-heading"><span id="date-Monday"></span></h3>
         <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
         <a href= "#" class="hover-button" onclick="addMeal()">Add Meal </a>
 
@@ -171,44 +193,44 @@
 
 
     <div class="day-container day-Tuesday">
-        <h3 class="day-heading">Tuesday - <span id="date-Tuesday"></span></h3>
+        <h3 class="day-heading"><span id="date-Tuesday"></span></h3>
         <img src="recipe_image_url_tuesday.jpg" alt="Tuesday Recipe" class="recipe-image" onclick="openModal('Tuesday Recipe', 'recipe_image_url_tuesday.jpg')">
         <a href= "#" class="hover-button" onclick="addMeal()">Add Meal </a>
     </div>
 
     <div class="day-container day-Wednesday">
-        <h3 class="day-heading">Wednesday - <span id="date-Wednesday"></span></h3>
+        <h3 class="day-heading"><span id="date-Wednesday"></span></h3>
         <img src="recipe_image_url_wednesday.jpg" alt="Wednesday Recipe" class="recipe-image" onclick="openModal('Wednesday Recipe', 'recipe_image_url_wednesday.jpg')">
         <a href= "#" class="hover-button" onclick="addMeal()">Add Meal </a>
     </div>
 
     <div class="day-container day-Thursday">
-        <h3 class="day-heading">Thursday - <span id="date-Thursday"></span></h3>
+        <h3 class="day-heading"><span id="date-Thursday"></span></h3>
         <img src="recipe_image_url_thursday.jpg" alt="Thursday Recipe" class="recipe-image" onclick="openModal('Thursday Recipe', 'recipe_image_url_thursday.jpg')">
         <a href= "#" class="hover-button" onclick="addMeal()">Add Meal </a>
     </div>
 
     <div class="day-container day-Friday">
-        <h3 class="day-heading">Friday - <span id="date-Friday"></span></h3>
+        <h3 class="day-heading" <span id = "date-Friday"> </span></h3>
         <img src="recipe_image_url_friday.jpg" alt="Friday Recipe" class="recipe-image" onclick="openModal('Friday Recipe', 'recipe_image_url_friday.jpg')">
         <a href= "#" class="hover-button" onclick="addMeal()">Add Meal </a>
     </div>
 
     <div class="day-container day-Saturday">
-        <h3 class="day-heading">Saturday - <span id="date-Saturday"></span></h3>
+        <h3 class="day-heading"><span id="date-Saturday"></span></h3>
         <img src="recipe_image_url_saturday.jpg" alt="Saturday Recipe" class="recipe-image" onclick="openModal('Saturday Recipe', 'recipe_image_url_saturday.jpg')">
         <a href= "#" class="hover-button" onclick="addMeal()">Add Meal </a>
     </div>
 
     <div class="day-container day-Sunday">
-        <h3 class="day-heading">Sunday - <span id="date-Sunday"></span></h3>
+        <h3 class="day-heading"><span id="date-Sunday"></span></h3>
         <img src="recipe_image_url_sunday.jpg" alt="Sunday Recipe" class="recipe-image" onclick="openModal('Sunday Recipe', 'recipe_image_url_sunday.jpg')">
         <a href= "#" class="hover-button" onclick="addMeal()">Add Meal </a>
     </div>
 
 
 
-</div>
+
 
     <!-- Repeat for other days -->
 
@@ -220,25 +242,35 @@
             <!-- Additional recipe details can be added here -->
         </div>
     </div>
-</div>
+
 
 <script>
-      //function to format the date
-        function formatDate(date)
-        {
-        var options = { weekday: 'long', month: 'long', day: 'numeric' };
+
+    //function to format the date
+    function formatDate(date) {
+        const options = { month: 'long', day: 'numeric' };
         return new Date(date).toLocaleDateString('en-US', options);
     }
 
-        // Set the current date for each day
-        document.getElementById('date-Monday').innerText = formatDate(new Date().getTime() + (24 * 60 * 60 * 1000)); // Adding 1 day
-        document.getElementById('date-Tuesday').innerText = formatDate(new Date().getTime() + (2 * 24 * 60 * 60 * 1000)); // Adding 1 day
-        document.getElementById('date-Wednesday').innerText = formatDate(new Date().getTime() + (3 * 24 * 60 * 60 * 1000)); // Adding 2 days
-        document.getElementById('date-Thursday').innerText = formatDate(new Date().getTime() + (4 * 24 * 60 * 60 * 1000)); // Adding 3 days
-        document.getElementById('date-Friday').innerText = formatDate(new Date().getTime() + (5 * 24 * 60 * 60 * 1000)); // Adding 4 days
-        document.getElementById('date-Saturday').innerText = formatDate(new Date().getTime() + (6 * 24 * 60 * 60 * 1000)); // Adding 5 days
-        document.getElementById('date-Sunday').innerText = formatDate(new Date().getTime());
+    function updateWeeklyDates() {
+        const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const currentDate = new Date();
+        const currentDayOfWeek = currentDate.getDay();
 
+        // Loop through the days of the week and update the corresponding elements
+        for (let i = 0; i < daysOfWeek.length; i++) {
+            const dayElement = document.getElementById(`date-${daysOfWeek[i]}`);
+            const daysToAdd = (i + 8 - currentDayOfWeek) % 7; // Calculate days to add to get to the next occurrence of this day
+            const newDate = new Date(currentDate.getTime() + (daysToAdd * 24 * 60 * 60 * 1000));
+            dayElement.innerText = `${daysOfWeek[i]}: ${formatDate(newDate)}`;
+        }
+    }
+
+    // Call the function to set initial dates
+    updateWeeklyDates();
+
+    // Update the dates every minute (you can adjust the interval as needed)
+    setInterval(updateWeeklyDates, 60000);
 //function to update the calories
 function updateTotalCalories() {
         var calorieInputs = document.querySelectorAll('.calorie-input');
@@ -258,6 +290,6 @@ function updateTotalCalories() {
           alert("Meal has been added!")
     }
 </script>
-</body>
+</div>
 </html>
 
