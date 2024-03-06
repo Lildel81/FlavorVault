@@ -1,5 +1,6 @@
 /* Reset some default styles */
-html, body {
+html, body
+{
     margin: 0;
     padding: 0;
 }
@@ -11,12 +12,12 @@ body {
 }
 
 #sidebar {
-    width: 200px;
-    background-color: #333;
+    width: 40px;
+    background-color: #f10202;
     color: #fff;
     padding: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
 
@@ -52,7 +53,12 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
-
+.container
+{
+    width: 40px;
+    display: flex;
+    flex-direction: row;
+}
 .modal {
     display: none;
     position: fixed;
@@ -119,5 +125,39 @@ h1 {
     background-color: #b9299c;
     color: #fff;
 }
+
+nav
+{
+    margin-right: 10px;
+    display: flex;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+li {
+    margin-right: 30px;
+}
+
+a {
+    text-decoration: aqua;
+    color: #ec0808;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #002aff; /* Change the color on hover */
+}
+
+h1 {
+    color: #333;
+}
+
 
 
