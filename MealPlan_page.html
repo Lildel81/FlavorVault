@@ -146,8 +146,7 @@
                 totalCalories += calories;
             });
 
-            document.getElementById('totalCalories').innerText = 'Total Calories: ' + totalCalories;
-        }
+          }
     </script>
 </head>
 
@@ -163,11 +162,50 @@
 <div id="main-content">
     <h1>Flavor Vault</h1>
 
-    <div class="Navigation"
-    id="sidebar
+   <div id="slider">
+       <div class=" slide">1</div>
+       <div class=" slide">2</div>
+       <div class=" slide">3</div>
+   </div>
+    <button class="prev">Prev</button>
+    <button class="next">Next</button>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let index = 0;
+
+        function prevSlide(){
+            slides[index].classList.remove('active');
+            index--;
+
+            if(index < 0)
+                index = slides.length -1;
+
+            slides[index].classList.add('active');
+        }
+
+        document.querySelector('.prev').addEventListener('click', e => {
+            prevSlide();
+        });
+
+        function nextSlide(){
+            slides[index].classList.remove('active');
+            index++;
+
+            if(index > slides.length -1)
+                index = 0;
+
+            slides[index].classList.add('active');
+        }
+
+        document.querySelector('.next').addEventListener('click', e => {
+            nextSlide();
+        });
+    </script>
+
+
+    <div class="Navigation" id="sidebar
 ">
-
-
         <nav>
         <ul>
             <li><a href="#">Home</a></li>
@@ -211,7 +249,7 @@
     </div>
 
     <div class="day-container day-Friday">
-        <h3 class="day-heading" <span id = "date-Friday"> </span></h3>
+        <h3 class="day-heading"><span id = "date-Friday"> </span></h3>
         <img src="recipe_image_url_friday.jpg" alt="Friday Recipe" class="recipe-image" onclick="openModal('Friday Recipe', 'recipe_image_url_friday.jpg')">
         <a href= "#" class="hover-button" onclick="addMeal()">Add Meal </a>
     </div>
@@ -219,7 +257,8 @@
     <div class="day-container day-Saturday">
         <h3 class="day-heading"><span id="date-Saturday"></span></h3>
         <img src="recipe_image_url_saturday.jpg" alt="Saturday Recipe" class="recipe-image" onclick="openModal('Saturday Recipe', 'recipe_image_url_saturday.jpg')">
-        <a href= "#" class="hover-button" onclick="addMeal()">Add Meal </a>
+        <a href= "#" class="hover-button" onclick="addMeal()">Add Meal
+        </a>
     </div>
 
     <div class="day-container day-Sunday">
