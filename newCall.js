@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*import { creatRequire } from 'module';
 const require = creatRequire(import.meta.url);*/
 
@@ -252,8 +253,33 @@ async function run() {
   }
 }
 run().catch(console.dir);
+=======
+function makeApiCall(q){
+
+
+//document.getElementById('output').innerText = ("works")
+const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+  
+  fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=e7ec260d55134d24ae88a19b2ae182a2", requestOptions)
+    .then((response) => response.text())
+    //.then((result) => document.getElementById("output").innerHTML="<h1>"+result[0].title+"</h1><br><img src = "+result[0].image+'"width=400/>')
+    //.then((result) => console.log(result))
+    .then((result) => document.getElementById("output").innerHTML=(result))
+    .catch((error) => console.error(error));
+    
+    
+
+
+
+>>>>>>> 12c935f (first push, new files)
 }
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 12c935f (first push, new files)
