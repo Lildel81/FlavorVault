@@ -59,14 +59,13 @@
 </div> -->
 
 <div id="main-content">
-    <h1>Flavor Vault
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">My Stuff</a></li>
-                <li><a href="#">Recipes</a></li>
-            </ul>
-        </nav>
+    <h1>
+        <div class="container">
+            <img class="image" src="Flavor_Vault_Logo.png" alt="Your Image">
+            <button class="nav-item">Home</button>
+            <button class="nav-item">My Stuff</button>
+            <button class="nav-item">Meal Plan</button>
+        </div>
     </h1>
 
 
@@ -115,131 +114,89 @@
 
     -->
 
-<!-- containers for the days seperated by colums -->
-    <div class="day-container day-Monday">
+    <!-- containers for the days seperated by colums -->
+    <div class= "split-Container">
+        <!--     java to make calander -->
+        <script>
+            const calendarEl = document.getElementById('calendar');
+
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            function generateCalendar(date) {
+                const d = date || new Date();
+                const month = d.getMonth();
+                const year = d.getFullYear();
+
+                const firstDay = (new Date(year, month, 1)).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+                calendarEl.innerHTML = "";
+
+                // Create table header row
+                const theadRow = document.createElement('tr');
+                theadRow.classList.add('thead');
+                for (let i = 0; i < 7; i++) {
+                    const th = document.createElement('th');
+                    th.textContent = (i + Sunday === 0) ? Sunday : weekdays[(i + Sunday) % 7];
+                    theadRow.appendChild(th);
+                }
+                calendarEl.appendChild(theadRow);
+
+                // Create table body rows
+                let rowCount = 1;
+                let cellCount = 0;
+                const tbody = document.createElement('tbody');
+                while (rowCount <= 6 && cellCount < daysInMonth + firstDay) {
+                    const row = document.createElement('tr');
+                    for (let i = 0; i < 7; i++) {
+                        const cell = document.createElement('td');
+                        if (cellCount >= firstDay && cellCount < daysInMonth + firstDay) {
+                            cell.textContent = cellCount - firstDay + 1;
+                            if (cellCount - firstDay + 1 === d.getDate() && month === d.getMonth() && year === d.getFullYear()) {
+                                cell.classList.add('today');
+                            }
+                        }
+                        row.appendChild(cell);
+                        cellCount++;
+                    }
+                    tbody.appendChild(row);
+                    rowCount++;
+                }
+                calendarEl.appendChild(tbody);
+            }
+
+            const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const Sunday = 0; // Adjust Sunday index if needed
+
+            generateCalendar();
+
+        </script>
+
+            <div class="calendar-container">
+                <h2>Calendar</h2>
+                <div class="calendar" id="calendar"></div>
+            </div>
+
+    <div class="day-container">
         <h3 class="day-heading"><span id="date-Monday"></span></h3>
         <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
-
-        <div class="meal-row">
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Monday_Breakfast')">Add Breakfast</a>
-            <p id="Calories_Monday_Breakfast">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Monday_lunch')">Add Lunch</a>
-            <p id="Calories_Monday_lunch">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Monday_Dinner')">Add Dinner</a>
-            <p id="Calories_Monday_Dinner">Total Calories: 0</p>
-
-        </div>
-
-    </div>
-
-
-    <div class="day-container day-Tuesday">
         <h3 class="day-heading"><span id="date-Tuesday"></span></h3>
-        <img src="recipe_image_url_tuesday.jpg" alt="Tuesday Recipe" class="recipe-image" onclick="openModal('Tuesday Recipe', 'recipe_image_url_tuesday.jpg')">
-
-        <div class="meal-row">
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Tuesday_Breakfast')">Add Breakfast</a>
-            <p id="Calories_Tuesday_Breakfast">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Tuesday_lunch')">Add Lunch</a>
-            <p id="Calories_Tuesday_lunch">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Monday_Dinner')">Add Dinner</a>
-            <p id="Calories_Tuesday_Dinner">Total Calories: 0</p>
-
-        </div>
-    </div>
-
-    <div class="day-container day-Wednesday">
+        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
         <h3 class="day-heading"><span id="date-Wednesday"></span></h3>
-        <img src="recipe_image_url_wednesday.jpg" alt="Wednesday Recipe" class="recipe-image" onclick="openModal('Wednesday Recipe', 'recipe_image_url_wednesday.jpg')">
-
-        <div class="meal-row">
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Wednesday_Breakfast')">Add Breakfast</a>
-            <p id="Calories_Wednesday_Breakfast">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Wednesday_lunch')">Add Lunch</a>
-            <p id="Calories_Wednesday_lunch">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Wednesday_Dinner')">Add Dinner</a>
-            <p id="Calories_Wednesday_Dinner">Total Calories: 0</p>
-        </div>
-
-    </div>
-
-    <div class="day-container day-Thursday">
+        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
         <h3 class="day-heading"><span id="date-Thursday"></span></h3>
-        <img src="recipe_image_url_thursday.jpg" alt="Thursday Recipe" class="recipe-image" onclick="openModal('Thursday Recipe', 'recipe_image_url_thursday.jpg')">
-
-        <div class="meal-row">
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Thursday_Breakfast')">Add Breakfast</a>
-            <p id="Calories_Thursday_Breakfast">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Thursday_lunch')">Add Lunch</a>
-            <p id="Calories_Thursday_lunch">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Thursday_Dinner')">Add Dinner</a>
-            <p id="Calories_Thursday_Dinner">Total Calories: 0</p>
-        </div>
-
-    </div>
-
-    <div class="day-container day-Friday">
-        <h3 class="day-heading"><span id = "date-Friday"> </span></h3>
-        <img src="recipe_image_url_friday.jpg" alt="Friday Recipe" class="recipe-image" onclick="openModal('Friday Recipe', 'recipe_image_url_friday.jpg')">
-
-        <div class="meal-row">
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Friday_Breakfast')">Add Breakfast</a>
-            <p id="Calories_Friday_Breakfast">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Friday_lunch')">Add Lunch</a>
-            <p id="Calories_Friday_lunch">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Friday_Dinner')">Add Dinner</a>
-            <p id="Calories_Friday_Dinner">Total Calories: 0</p>
-        </div>
-
-    </div>
-
-    <div class="day-container day-Saturday">
+        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
+        <h3 class="day-heading"><span id="date-Friday"></span></h3>
+        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
         <h3 class="day-heading"><span id="date-Saturday"></span></h3>
-        <img src="recipe_image_url_saturday.jpg" alt="Saturday Recipe" class="recipe-image" onclick="openModal('Saturday Recipe', 'recipe_image_url_saturday.jpg')">
-
-        <div class="meal-row">
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Saturday_Breakfast')">Add Breakfast</a>
-            <p id="Calories_Saturday_Breakfast">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Saturday_lunch')">Add Lunch</a>
-            <p id="Calories_Saturday_lunch">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Saturday_Dinner')">Add Dinner</a>
-            <p id="Calories_Saturday_Dinner">Total Calories: 0</p>
-        </div>
-
-    </div>
-
-    <div class="day-container day-Sunday">
+        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
         <h3 class="day-heading"><span id="date-Sunday"></span></h3>
-        <img src="recipe_image_url_sunday.jpg" alt="Sunday Recipe" class="recipe-image" onclick="openModal('Sunday Recipe', 'recipe_image_url_sunday.jpg')">
-
-        <div class="meal-row">
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Sunday_Breakfast')">Add Breakfast</a>
-            <p id="Calories_Sunday_Breakfast">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Sunday_lunch')">Add Lunch</a>
-            <p id="Calories_Sunday_lunch">Total Calories: 0</p>
-
-            <a href="#" class="hover-button" onclick="addMeal('Calories_Sunday_Dinner')">Add Dinner</a>
-            <p id="Calories_Sunday_Dinner">Total Calories: 0</p>
-        </div>
-
+        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
     </div>
 
-
-
-
+    </div>
 
     <!-- Repeat for other days -->
 
@@ -251,7 +208,6 @@
             <!-- Additional recipe details can be added here -->
         </div>
     </div>
-
 
 <script>
 
