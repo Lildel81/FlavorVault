@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Mealplan_page2.css">
+    <title>Meal Containers</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="main-content">
+    <h1>
+        <div class="container">
+            <img class="image" src="Flavor_Vault_Logo.png" alt="Your Image">
+            <button class="nav-item">Home</button>
+            <button class="nav-item">My Stuff</button>
+            <button class="nav-item">Meal Plan</button>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for recipes....">
+        </div>
+    </h1>
+</div>
+
+
+
+<h2 id="dateHeader">Current Date</h2>
+
+<div class="container2">
+    <h2>Breakfast</h2>
+    <!-- Place breakfast content here -->
+</div>
+
+<div class="container2">
+    <h2>Lunch</h2>
+    <!-- Place lunch content here -->
+</div>
+
+<div class="container2">
+    <h2>Dinner</h2>
+    <!-- Place dinner content here -->
+</div>
+
+<script>
+    // Function to set the current date above containers
+    function setCurrentDate() {
+        var currentDate = new Date();
+        var dateString = currentDate.toDateString();
+        var dateHeaderElement = document.getElementById('dateHeader');
+        dateHeaderElement.textContent = dateString;
+    }
+
+    // Call the function when the page loads
+    window.onload = setCurrentDate;
+</script>
+
+
+</body>
+</html>

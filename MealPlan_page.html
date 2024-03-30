@@ -1,63 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Mealplan_page.css" >
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Mealplan_page.css">
     <title>Meal Plan</title>
-
-    <script>
-        function openModal(recipeName, imageUrl) {
-            var modal = document.getElementById('recipeModal');
-            var modalContent = document.getElementById('modalContent');
-            //var recipeImage = document.getElementById('modalRecipeImage');
-            var recipeNameElement = document.getElementById('modalRecipeName');
-
-            modal.style.display = 'flex';
-            recipeImage.src = imageUrl;
-            recipeNameElement.innerText = recipeName;
-        }
-
-        function closeModal() {
-            var modal = document.getElementById('recipeModal');
-            modal.style.display = 'none';
-        }
-
-        function calculateCalories(day) {
-            var mealInputs = document.querySelectorAll('.day-' + day + ' .meal-input');
-            var totalCalories = 0;
-
-            mealInputs.forEach(function (input) {
-                var calories = parseInt(input.value) || 0;
-                totalCalories += calories;
-            });
-
-            document.getElementById('calories-' + day).innerText = 'Total Calories: ' + totalCalories;
-        }
-
-        function updateTotalCalories() {
-            var calorieInputs = document.querySelectorAll('.calorie-input');
-            var totalCalories = 0;
-
-            calorieInputs.forEach(function (input) {
-                var calories = parseInt(input.value) || 0;
-                totalCalories += calories;
-            });
-
-          }
-    </script>
 </head>
-
-<!-- <body><div id="sidebar">
-    <h2>Calories Counter</h2>
-    <div class="calorie-tracker">
-        <label for="calorieInput">Daily Calories:</label>
-        <input type="number" id="calorieInput" class="calorie-input" placeholder="Enter calories" oninput="updateTotalCalories()">
-    </div>
-    <p id="totalCalories" class="total-calories">Total Calories: 0</p>
-</div> -->
-
+<body>
 <div id="main-content">
     <h1>
         <div class="container">
@@ -66,195 +15,153 @@
             <button class="nav-item">My Stuff</button>
             <button class="nav-item">Meal Plan</button>
         </div>
+
+        <div class="line"></div>
+P
     </h1>
+</div>
 
 
-    <!--  Information for the slider that was supposed to be at the top but it might not work
+<div class="split-container">
+    <div class="split-left">
+        <h2>Calendar</h2>
+        <div class="calendar">
+            <h3 class = "month"></h3>
+            <ul class="dates">
+                <!-- Dates of the month will be populated here -->
+            </ul>
+        </div>
+        <div class="under-container">
+            <h4 class="today2"></h4>
+            <button class="meal-button" onclick="gotoPage2()">Breakfast</button>
+            <button class="meal-button" onclick="gotoPage2()">Lunch</button>
+            <button class="meal-button" onclick="gotoPage2()">Dinner</button>
 
-    <div id="slider">
-       <div class=" slide">1</div>
-       <div class=" slide">2</div>
-       <div class=" slide">3</div>
-   </div>
-    <button class="prev">Prev</button>
-    <button class="next">Next</button>
-
-    <script>
-        const slides = document.querySelectorAll('.slide');
-        let index = 0;
-
-        function prevSlide(){
-            slides[index].classList.remove('active');
-            index--;
-
-            if(index < 0)
-                index = slides.length -1;
-
-            slides[index].classList.add('active');
-        }
-
-        document.querySelector('.prev').addEventListener('click', e => {
-            prevSlide();
-        });
-
-        function nextSlide(){
-            slides[index].classList.remove('active');
-            index++;
-
-            if(index > slides.length -1)
-                index = 0;
-
-            slides[index].classList.add('active');
-        }
-
-        document.querySelector('.next').addEventListener('click', e => {
-            nextSlide();
-        });
-    </script>
-
-    -->
-
-    <!-- containers for the days seperated by colums -->
-    <div class= "split-Container">
-        <!--     java to make calander -->
-        <script>
-            const calendarEl = document.getElementById('calendar');
-
-            const monthNames = ["January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-            ];
-
-            function generateCalendar(date) {
-                const d = date || new Date();
-                const month = d.getMonth();
-                const year = d.getFullYear();
-
-                const firstDay = (new Date(year, month, 1)).getDay();
-                const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-                calendarEl.innerHTML = "";
-
-                // Create table header row
-                const theadRow = document.createElement('tr');
-                theadRow.classList.add('thead');
-                for (let i = 0; i < 7; i++) {
-                    const th = document.createElement('th');
-                    th.textContent = (i + Sunday === 0) ? Sunday : weekdays[(i + Sunday) % 7];
-                    theadRow.appendChild(th);
+            <script>
+                function gotoPage2()
+                {
+                    window.location.href= "meal_Plan2.html";
                 }
-                calendarEl.appendChild(theadRow);
 
-                // Create table body rows
-                let rowCount = 1;
-                let cellCount = 0;
-                const tbody = document.createElement('tbody');
-                while (rowCount <= 6 && cellCount < daysInMonth + firstDay) {
-                    const row = document.createElement('tr');
-                    for (let i = 0; i < 7; i++) {
-                        const cell = document.createElement('td');
-                        if (cellCount >= firstDay && cellCount < daysInMonth + firstDay) {
-                            cell.textContent = cellCount - firstDay + 1;
-                            if (cellCount - firstDay + 1 === d.getDate() && month === d.getMonth() && year === d.getFullYear()) {
-                                cell.classList.add('today');
-                            }
-                        }
-                        row.appendChild(cell);
-                        cellCount++;
-                    }
-                    tbody.appendChild(row);
-                    rowCount++;
+                function displayCurrentDate() {
+                    const today = new Date();
+                    const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+                    const formattedDate = today.toLocaleDateString('en-US', dateOptions);
+                    document.querySelector('.today2').textContent = formattedDate;
                 }
-                calendarEl.appendChild(tbody);
-            }
 
-            const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            const Sunday = 0; // Adjust Sunday index if needed
+                function goToPage(mealType) {
+                    // Example redirect - you'll likely change the URL structure
+                    const newUrl = "/meals/" + mealType;
+                    window.location.href = newUrl;
+                }
 
-            generateCalendar();
+                // Call on page load to display the date
+                displayCurrentDate()
 
-        </script>
-
-            <div class="calendar-container">
-                <h2>Calendar</h2>
-                <div class="calendar" id="calendar"></div>
-            </div>
-
-    <div class="day-container">
-        <h3 class="day-heading"><span id="date-Monday"></span></h3>
-        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
-        <h3 class="day-heading"><span id="date-Tuesday"></span></h3>
-        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
-        <h3 class="day-heading"><span id="date-Wednesday"></span></h3>
-        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
-        <h3 class="day-heading"><span id="date-Thursday"></span></h3>
-        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
-        <h3 class="day-heading"><span id="date-Friday"></span></h3>
-        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
-        <h3 class="day-heading"><span id="date-Saturday"></span></h3>
-        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
-        <h3 class="day-heading"><span id="date-Sunday"></span></h3>
-        <img src="recipe_image_url_monday.jpg" alt="Monday Recipe" class="recipe-image" onclick="openModal('Monday Recipe', 'recipe_image_url_monday.jpg')">
-    </div>
-
-    </div>
-
-    <!-- Repeat for other days -->
-
-    <div class="modal" id="recipeModal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modalRecipeName"></h2>
-            <img id="modalRecipeImage" alt="Recipe Image">
-            <!-- Additional recipe details can be added here -->
+            </script>
         </div>
     </div>
 
+
 <script>
+    // Function to generate calendar
+    function generateCalendar() {
+        const datesList = document.querySelector('.dates');
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        const monthElement = document.querySelector('.month');
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    //function to format the date
-    function formatDate(date) {
-        const options = { month: 'long', day: 'numeric' };
-        return new Date(date).toLocaleDateString('en-US', options);
-    }
+        // Clear existing dates
+        datesList.innerHTML = '';
 
-    function updateWeeklyDates() {
-        const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-        const currentDate = new Date();
-        const currentDayOfWeek = currentDate.getDay();
+        // Populate month
+        monthElement.textContent = monthNames[currentMonth] + ' ' + currentYear;
 
-        // Loop through the days of the week and update the corresponding elements
-        for (let i = 0; i < daysOfWeek.length; i++) {
-            const dayElement = document.getElementById(`date-${daysOfWeek[i]}`);
-            const daysToAdd = (i + 8 - currentDayOfWeek) % 7; // Calculate days to add to get to the next occurrence of this day
-            const newDate = new Date(currentDate.getTime() + (daysToAdd * 24 * 60 * 60 * 1000));
-            dayElement.innerText = `${daysOfWeek[i]}: ${formatDate(newDate)}`;
+        // Populate with the dates of the month
+        for (let date = 1; date <= daysInMonth; date++) {
+            const dateCell = document.createElement('li');
+            dateCell.textContent = date;
+            dateCell.classList.add('date');
+
+            // Highlight today's date
+            if (date === now.getDate() && currentMonth === now.getMonth() && currentYear === now.getFullYear()) {
+                dateCell.classList.add('today');
+            }
+
+            datesList.appendChild(dateCell);
         }
     }
 
-    // Call the function to set initial dates
-    updateWeeklyDates();
+    let currentDate = new Date(); // Store the initial current date
 
-    // Update the dates every minute (you can adjust the interval as needed)
-    setInterval(updateWeeklyDates, 60000);
-//function to update the calories
-function updateTotalCalories() {
-        var calorieInputs = document.querySelectorAll('.calorie-input');
-        var totalCalories = 0;
-
-        calorieInputs.forEach(function (input) {
-            var calories = parseInt(input.value) || 0;
-            totalCalories += calories;
-        });
-
-        document.getElementById('totalCalories').innerText = 'Total Calories: ' + totalCalories;
-    }
-
-    function addMeal()
-    {
-          //add logic to add the meal here
-          alert("Meal has been added!")
-    }
+    // Call the function on page load
+    generateCalendar();
 </script>
-</div>
-</html>
 
+
+
+    <!--RIGHT CONTAINER Your HTML content goes here -->
+    <div class="split-right">
+        <h2>Meal Plan for the Week</h2>
+        <div class="weekly-plan">
+            <!-- JavaScript will populate the dates here -->
+        </div>
+
+        <script>
+            // Function to get the current dates of the week
+            function getCurrentWeekDates() {
+                const currentDate = new Date();
+                const currentDayOfWeek = currentDate.getDay(); // 0 for Sunday, 1 for Monday, etc.
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+                // Calculate the start date of the week (Sunday)
+                const startDate = new Date(currentDate);
+                startDate.setDate(currentDate.getDate() - currentDayOfWeek);
+
+                // Create an array to store the dates of the week
+                const weekDates = [];
+
+                // Populate the weekDates array with the dates of the week
+                for (let i = 0; i < 7; i++) {
+                    const date = new Date(startDate);
+                    date.setDate(startDate.getDate() + i);
+                    weekDates.push(date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+                }
+
+                return weekDates;
+            }
+
+            // Function to display the current dates of the week
+            function displayCurrentWeekDates() {
+                const weekDates = getCurrentWeekDates();
+                const weeklyPlan = document.querySelector('.weekly-plan');
+
+                // Clear any existing content
+                weeklyPlan.innerHTML = '';
+
+                // Display the dates of the week
+                weekDates.forEach(date => {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.classList.add('day');
+                    dayDiv.textContent = date;
+
+                    // Highlight today's date
+                    if (date === new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })) {
+                        dayDiv.classList.add('today');
+                    }
+
+                    weeklyPlan.appendChild(dayDiv);
+                });
+            }
+
+            // Call the function to display the current dates of the week
+            displayCurrentWeekDates();
+        </script>
+    </div>
+</div>
+    </body>
+    </html>
