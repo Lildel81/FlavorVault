@@ -1,41 +1,23 @@
-const express = require("express");
-const app = express();
-const { mongoClient, MongoClient } = require("mongodb");
-
-const port = 9000;
-const host = "http://127.0.0.1:" + port;
-
-app.listen(port, () => console.log(host));
-
-//MongoDB Connection
-//const mongodbURL = "mongodb://127.0.0.1:27017";
-const mongodbURL = "mongodb+srv://Terry:BBEE9930&Ry133*@codebreakers.g8e7wjq.mongodb.net/?retryWrites=true&w=majority&appName=codebreakers";
-const client = new MongoClient(mongodbURL);
-
-async function connect() {
-  try {
-    const conn = await client.connect();
-    const db = conn.db("School");
-    const coll = db.collection("Students");
-    await db.collection('Students').insertOne({
-        Name: "Bugs Bunney",
-        Phone_Number: "916-555-8858",
-        GPA: 3.9,
-        Year: "Senior"
-    })
-    const result = await coll.find({}).toArray();
-    return result;
-  } catch (err) {console.log(err)};
-    return;
-  }
 
 
-//API
-app.get("/", (req, res) => {
-  res.send('Hi!');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const credentials = 'C:/Users/terry/Dropbox/Spring 2024/CSC 131 - Software Development/Code Workspace/Cert/X509-cert-8028175764436620696.pem'
+const client = new MongoClient('mongodb+srv://codebreakers.g8e7wjq.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority&appName=codebreakers', {
+  tlsCertificateKeyFile: credentials,
+  serverApi: ServerApiVersion.v1
 });
+async function run() {
+  try {
+    await client.connect();
+    const database = client.db("School");
+    const collection = database.collection("Student");
+    const docCount = await collection.countDocuments({});
+    console.log(docCount);
+    // perform actions using client
+  } finally {
 
-app.get("/students", async (req, res) => {
-    const result = await connect();
-    res.send(result);
-} )
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
