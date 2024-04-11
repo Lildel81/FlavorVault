@@ -1,3 +1,17 @@
+function addToMongoDB(){
+  console.log('it is working');
+  const image = document.getElementById("recipeImage").src;
+  const name = document.getElementById("recipeName").innerText;
+  const ingredients = document.getElementById("ingredients").innerText;
+  const instructions = document.getElementById("inst").innerText;
+
+  const recipe = {
+    image: image, 
+    name: name,
+    ingredients: ingredients,
+    instructions: instructions
+  };
+  console.log(recipe);
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -6,12 +20,15 @@ const client = new MongoClient('mongodb+srv://codebreakers.g8e7wjq.mongodb.net/?
   tlsCertificateKeyFile: credentials,
   serverApi: ServerApiVersion.v1
 });
+const arrToInsert = ['Tuna', 'Mayo', 'Relish', 'Bread'];
 async function run() {
   try {
     await client.connect();
-    const database = client.db("School");
-    const collection = database.collection("Student");
+    const database = client.db("CSC131");
+    const collection = database.collection("Recipes");
     const docCount = await collection.countDocuments({});
+    const result = await collection.insertOne({ recipe })
+
     console.log(docCount);
     // perform actions using client
   } finally {
@@ -21,3 +38,4 @@ async function run() {
   }
 }
 run().catch(console.dir);
+}

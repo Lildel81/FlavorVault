@@ -66,6 +66,48 @@ body {
 }
 
 
+<<<<<<< HEAD
+=======
+.p1 {
+  font-family: 'Roboto' ;
+  font-size: 40px;
+  color: #4B244A;
+  font-weight: bold;
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 100%;
+  align-items: center;
+}
+
+.search-container2 {
+  position: absolute;
+  top: 40%;
+  right: 35%;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar2 {
+  position: relative; /* Make the search bar a positioning context */
+  padding: 10px 40px 10px 5px;
+  border-radius: 165px;
+  width: 400px;
+  margin-right: 20px; /* Adjust the margin-right to create space for the icon */
+}
+
+
+.footer {
+  
+  position: absolute;
+  bottom:0%;
+  left: 50%;
+  width:100%;
+  transform: translateX(-50%);
+  width: 1265px;
+  height: 305px;
+}
+>>>>>>> 567f0c7 (adding all of the files)
 
 
 
@@ -75,6 +117,7 @@ body {
 
 /* Slideshow container */
 .slideshow-container {
+<<<<<<< HEAD
   
   position: absolute;
   top: 25%;
@@ -84,6 +127,13 @@ body {
   height: 25px;
   object-fit: cover;
   
+=======
+  max-width: 1000px;
+  display:flex; 
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin: auto;
+>>>>>>> 567f0c7 (adding all of the files)
 }
 
 /* Hide the images by default */
@@ -95,10 +145,16 @@ body {
 .prev, .next {
   cursor: pointer;
   position: absolute;
+<<<<<<< HEAD
   top: 80%;
   width: auto;
   margin-top: 325px;
   
+=======
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+>>>>>>> 567f0c7 (adding all of the files)
   padding: 16px;
   color: white;
   font-weight: bold;
@@ -110,6 +166,7 @@ body {
 
 /* Position the "next button" to the right */
 .next {
+<<<<<<< HEAD
   right: -425%;
   
   border-radius: 3px 0 0 3px;
@@ -119,12 +176,31 @@ body {
   right: -325%;
 }
 
+=======
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+>>>>>>> 567f0c7 (adding all of the files)
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
+<<<<<<< HEAD
 
+=======
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+>>>>>>> 567f0c7 (adding all of the files)
 
 /* Number text (1/3 etc) */
 .numbertext {
@@ -145,6 +221,7 @@ body {
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
+<<<<<<< HEAD
   position: relative; 
   right: -410%;
   
@@ -152,6 +229,10 @@ body {
 
 
 
+=======
+}
+
+>>>>>>> 567f0c7 (adding all of the files)
 .active, .dot:hover {
   background-color: #717171;
 }
@@ -165,6 +246,7 @@ body {
 @keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
+<<<<<<< HEAD
 }
 
 
@@ -212,3 +294,6 @@ body {
   width: 1265px;
   height: 305px;
 }
+=======
+}
+>>>>>>> 567f0c7 (adding all of the files)
