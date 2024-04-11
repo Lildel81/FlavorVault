@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spoonacular Search</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="newCall.js"></script>
+</head>
+
+<img>
+    
+    
+<input id = "search"><button onclick = getResult()>Search</button>
+<br>
+<img id="recipeImage" alt="recipeName"></img>
+<div id = "recipeName"></div>
+<div class = 'output'></div>
+
+</body>
+</html>
