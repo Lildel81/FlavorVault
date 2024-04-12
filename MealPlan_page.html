@@ -16,8 +16,9 @@
             <button class="nav-item">Meal Plan</button>
         </div>
 
-        <div class="line"></div>
-P
+        <div class="line">
+
+        </div>
     </h1>
 </div>
 
@@ -48,12 +49,6 @@ P
                     const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
                     const formattedDate = today.toLocaleDateString('en-US', dateOptions);
                     document.querySelector('.today2').textContent = formattedDate;
-                }
-
-                function goToPage(mealType) {
-                    // Example redirect - you'll likely change the URL structure
-                    const newUrl = "/meals/" + mealType;
-                    window.location.href = newUrl;
                 }
 
                 // Call on page load to display the date
@@ -129,7 +124,7 @@ P
                 for (let i = 0; i < 7; i++) {
                     const date = new Date(startDate);
                     date.setDate(startDate.getDate() + i);
-                    weekDates.push(date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+                    weekDates.push(date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
                 }
 
                 return weekDates;

@@ -33,17 +33,26 @@
 
 <div class="container2">
     <h2>Breakfast</h2>
-    <!-- Place breakfast content here -->
+    <button class="getRecipeButton">
+        +
+
+    </button>
+
 </div>
 
 <div class="container2">
     <h2>Lunch</h2>
-    <!-- Place lunch content here -->
+    <button class="getRecipeButton">
+        +
+    </button>
+
 </div>
 
 <div class="container2">
     <h2>Dinner</h2>
-    <!-- Place dinner content here -->
+    <button class="getRecipeButton">
+        +
+    </button>
 </div>
 
 <script>
@@ -59,6 +68,29 @@
     window.onload = setCurrentDate;
 </script>
 
+<!--/* function to call api */-->
+<script>
+
+    const apiKey = '0b6690a17c934247a599cae2fe6e3141';
+    const getRecipeButton = document.getElementById('getRecipeButton');
+    const recipeDisplay = document.getElementById('recipeDisplay'); // Assuming you have this element
+
+    getRecipeButton.addEventListener('click', () => {
+        fetch('https://api.spoonacular.com/recipes/random?apiKey=')
+            .then(response => response.json())
+            .then(data => {
+                const recipe = data.recipes[0];
+                recipeDisplay.innerHTML = `
+<h2>${recipe.title}</h2>
+<img src="${recipe.image}" width="200">
+<p>${recipe.summary}</p>
+<a href="${recipe.sourceUrl}" target="_blank">Full Recipe</a>
+`;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+</script>
 
 </body>
 </html>
