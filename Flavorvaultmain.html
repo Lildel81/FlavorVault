@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mainpage.css"> 
+    <title>Flavor Vault </title>
+</head>
+<body>
+
+    <!-- Your image goes here -->
+    <div class="container">
+      <img class="image" src="img/Logo.jpg" alt="Your Image">
+      <div class="nav-item">Home</div>
+      <div class="nav-item">My Stuff</div>
+      <div class="nav-item">Meal Plan</div>
+    </div>
+
+    <!-- Your line goes here -->
+    <div class="line"></div>
+
+    <!--<div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search for recipes....">
+        <span class="search-icon">&#128269;</span>
+    </div>-->
+
+    <form action="recipe.html" method="GET">
+    <label for="search">Search:</label>
+    <input type="text" id="search" name="query">
+    <button type="submit">Search</button>
+    
+    </form>
+   <!-- Slideshow container -->
+<div class="slideshow-container">
+
+  <!-- Full-width images with number and caption text -->
+  <div class="mySlides fade">
+    <div class="numbertext">1 / 6</div>
+    <img src="img/Rectangle 9.jpg" width="1458px" height="414px">
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">2 / 6</div>
+    <img src="img/Img1.jpg" width="1458px" height="414px">
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">3 / 6</div>
+    <img src="img/img2.jpg" width="1458px" height="414px">
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">4 / 6</div>
+    <img src="img/img3.jpg" width="1458px" height="414px">
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">5 / 6</div>
+    <img src="img/img4.jpg" width="1458px" height="414px">
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">6 / 6</div>
+    <img src="img/img 5.jpg" width="1458px" height="414px">
+  </div>
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+  <!-- The dots/circles -->
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+  
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+  
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+  
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+  }
+  </script>
+  
+   
+</div>
+
+
+<br>
+    <p class="p1">Unlock Your Inner Chef</p>
+
+    <div class="search-container2">
+      <input type="text" class="search-bar2" placeholder="Search for recipes....">
+      <span class="search-icon">&#128269;</span>
+   </div>
+
+    <img class="footer" src="img/Group 4.png" alt="Food Header">
+
+<!--<div class="topnav">
+        <a class="home" href="#home">Home</a>
+        <a href="https://www.w3schools.com/">MyStuff</a>
+        <a href="#Mealplan">Mealplan</a>
+        <img src="img/Logo.jpg" alt="Flavor Vault logo" width="154" height="25">
+        <input type="text" placeholder="Search.."> -->
+
+  <!--<img src="img/Rectangle 9.jpg" alt="Food Header" width="1458" height="414"> -->
+   
+
+</body>
+</html>
