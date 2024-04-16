@@ -3,7 +3,7 @@
     height: 700px;
     border: 1px solid #ccc;
     padding: 20px;
-    margin: 20px;
+    margin: 30px;
     display: inline-block;
     text-align: center;
     background-color: lightgrey;
@@ -13,6 +13,8 @@
 .container2
 {
     margin-top: 50px;
+    height: 1000px;
+    position: relative;
 }
 #main-content {
     padding: 20px;
@@ -90,4 +92,10 @@ padding: 10px 40px 10px 5px;
 {
     background-color:white;
     color: #98C1D9;
+}
+.Main_container
+{
+    position: absolute;
+    height: 5000px;
+    width: 2700px
 }

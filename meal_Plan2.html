@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Mealplan_page2.css">
+
     <title>Meal Containers</title>
     <style>
 
@@ -27,16 +28,23 @@
     </h1>
 </div>
 
-
-
+<div class = "Main_container">
+<!--this is where all the code for the containers are that contain all the recipe information-->
 <h2 id="dateHeader">Current Date</h2>
 
 <div class="container2">
     <h2>Breakfast</h2>
-    <button class="getRecipeButton">
-        +
+    <input id = "search"><button onclick = getResult()>Search</button> <!--This is the search button-->
+    <br>
+    <img id="recipeImage">
 
-    </button>
+    <div id = "recipeName"></div> <!--This is where the name will be displayed once I fix the code-->
+
+    <div id = "ingredients"></div>
+    <button id = addToMongoDB onclick="addToMongoDB()">Add Recipe to my collection</button>
+
+    <script src="newCall.js"></script>
+    <script src="index.js"></script>
 
 </div>
 
@@ -45,7 +53,6 @@
     <button class="getRecipeButton">
         +
     </button>
-
 </div>
 
 <div class="container2">
@@ -53,6 +60,9 @@
     <button class="getRecipeButton">
         +
     </button>
+
+</div>
+
 </div>
 
 <script>
