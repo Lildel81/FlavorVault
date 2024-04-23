@@ -1,11 +1,6 @@
 const {Recipe, validate} = require('../models/recipe');
 const express = require('express');
 
-
-
-
-
-
 const app = express();
 
 
@@ -25,17 +20,14 @@ const addRecipe = async (req, res, next) => {
     const {error} = validate(req.body);
     if(error) return res.status(422).send(error.details[0].message);
     let recipe = await new Recipe({
-        recipeName: req.body.recipeName,
-        ingredients: req.body.ingredients,
-        instructions: req.body.instructions
+        Title: req.body.title,
+        Ingredients: req.body.ingredients,
+        Instructions: req.body.instructions
 
     })
     recipe = await recipe.save();
     res.redirect('/');
 }
-
-
-
 
 let fetch;
 
@@ -53,7 +45,7 @@ const requestOptions = {
     redirect: "follow"
   };
   try{
-  const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=e7ec260d55134d24ae88a19b2ae182a2&number=1&query="+q, requestOptions);
+  const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=2e5cc10d3d884d7d8d0536b8ad31d4ed&addRecipeInformation=true&number=1&query="+q, requestOptions);
   const result = await response.json();
   return result;
     
@@ -63,29 +55,59 @@ const requestOptions = {
 }
 }
 const getResult = async (req, res) =>{
-    const q = req.query.searchRecipe; // gets the value of the search bar. change 'search' to whatever the ID is for your search bar.
-    result = await findRecipe(q, 1);
-    //console.log(res); // prints the results on the console. left in for testing. Uncomment to use.
+    const q = req.query.searchRecipe; 
+    result = await findRecipe(q);
+   
     str_res = JSON.stringify(result);
-    //console.log(str_res);//prints the conversion to string to the console. Left in for testing, uncomment to use.
+    
   
     try {
       const parsedData = JSON.parse(str_res);
-      const recipeID = parsedData.results[0].id;
-      const dataToSend = {
-      Image: parsedData.results[0].image,
-      Title: parsedData.results[0].title,
-      }
-      const sendTitle = parsedData.results[0].title;
-      console.log(dataToSend.Title);
+
       
-      res.render('displayRecipe', { dataToSend: dataToSend, recipeData: { Title: sendTitle } });
-      getIngs(recipeID);
-      getIns(recipeID);
+      const recipeID = parsedData.results[0].id;
+      const Image = parsedData.results[0].image;
+      const URL = parsedData.results[0].sourceUrl;            
+      const sendTitle = parsedData.results[0].title;
+
+      
+      
+      
+      
+        const ings = await getIngs(res, recipeID); 
+        
+        const inst = await getIns(res, recipeID); 
+        let i = 0;
+        let ingredientsString = ings[1];
+        let instructionString = inst[i];
+        for(i = 1; i < ings.length; i++){
+          ingredientsString = ingredientsString + "<br>" + ings[i];
+
+        }
+        for (i = 1; i < inst.length; i++){
+          instructionString = instructionString + " " + inst[i];
+
+        }
+        console.log(ingredientsString);
+        const dataToSend = {
+          Image: parsedData.results[0].image,
+          Title: parsedData.results[0].title,
+          URL: parsedData.results[0].sourceUrl,
+          Summary: parsedData.results[0].summary,
+          Ingredients: ingredientsString,
+          Instructions: instructionString
+          }
+
+          res.render('displayRecipe', { dataToSend: dataToSend, recipeData: { Title: sendTitle } });
+
+       
+       
     } catch (error) {
         console.error("Error parsing JSON:", error);
       }
+      
     }
+    
 
 const getIngredients = async (id) => {
         //Don't change this part
@@ -97,12 +119,11 @@ const getIngredients = async (id) => {
           const response = await fetch(
             "https://api.spoonacular.com/recipes/" +
               id +
-              "/ingredientWidget.json?apiKey=e7ec260d55134d24ae88a19b2ae182a2&instructionsRequired=true&addRecipeInstructions=true",
+              "/ingredientWidget.json?apiKey=2e5cc10d3d884d7d8d0536b8ad31d4ed&instructionsRequired=true&addRecipeInstructions=true",
             requestOptions
           );
           const ingredients = await response.json();
-          //console.log(ingredients);
-          //this is left in for testing purposes. Uncomment to see the results in the console.
+          
       
           return ingredients;
         } catch (error) {
@@ -111,33 +132,45 @@ const getIngredients = async (id) => {
         }
       }
 
-const getIngs = async (recipeID) => {
+const getIngs = async (res, recipeID) => {
         console.log ('getIngs is running')
         res = await getIngredients(recipeID);
-        //console.log(res); // prints the results on the console. left in for testing. Uncomment to use.
+        
         str_res = JSON.stringify(res);
         let ings = [];
-      
+        let amounts = [];
+        let unit = [];
+        let ingreds = [];
         try {
           const parsedData = JSON.parse(str_res);
           i = 0;
           while (parsedData.ingredients[i + 1] != null) {
             ings[i] = parsedData.ingredients[i].name;
-      
+            amounts[i] = parsedData.ingredients[i].amount.us.value;
+            unit[i] = parsedData.ingredients[i].amount.us.unit;
             i++;
           }
           ings[i] = parsedData.ingredients[i].name;
-          console.log(ings);
-          //console.log("check point");
-          //console.log(recipeName);
-          //console.log(imageUrl); // prints the URL of the image to the console. left in for testing, uncomment to use.
+          amounts[i] = parsedData.ingredients[i].amount.us.value;
+          unit[i] = parsedData.ingredients[i].amount.us.unit;
+          
+
+          for(i = 0; i < ings.length; i++){
+            ingreds[i] = amounts[i] + " " + unit[i] + " " + ings[i];
+          }
+          console.log(ingreds);
+          return ingreds;
+          
         } catch (error) {
           console.error("Error parsing JSON:", error);
         }
 }
 
-const getInstructions = async (id, n) => {
-    //Don't change this part
+    
+
+
+const getInstructions = async (id) => {
+   
     const requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -146,13 +179,11 @@ const getInstructions = async (id, n) => {
       const response = await fetch(
         "https://api.spoonacular.com/recipes/" +
           id +
-          "/analyzedInstructions?apiKey=e7ec260d55134d24ae88a19b2ae182a2",
+          "/analyzedInstructions?apiKey=2e5cc10d3d884d7d8d0536b8ad31d4ed",
         requestOptions
       );
       const instruct = await response.json();
-      //console.log(instruct);
-      //this is left in for testing purposes. Uncomment to see the results in the console.
-      //console.log(result);
+      
       return instruct;
     } catch (error) {
       console.error(error);
@@ -160,10 +191,10 @@ const getInstructions = async (id, n) => {
     }
   }
 
-const getIns = async (recipeID) => {
-    //let q = document.getElementById('search').value; // gets the value of the search bar. change 'search' to whatever the ID is for your search bar.
+const getIns = async (res, recipeID) => {
+    
     res = await getInstructions(recipeID);
-    //console.log(res); // prints the results on the console. left in for testing. Uncomment to use.
+    
     str_res = JSON.stringify(res);
     let inst = [];
   
@@ -177,13 +208,13 @@ const getIns = async (recipeID) => {
         i++;
       }
       inst[i] = parsedData[0].steps[i].step;
+      return inst;
       
-      //document.getElementById("inst").innerHTML = inst;
       
     } catch (error) {
       console.error("Error parsing JSON:", error);
     }
-    console.log(inst);
+    //console.log(inst);
 }
 
 module.exports = {
@@ -199,7 +230,3 @@ module.exports = {
     
 }
 
-/*fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=e7ec260d55134d24ae88a19b2ae182a2&number=1&query="+q, requestOptions)
-    .then((response) => response.json())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));*/
