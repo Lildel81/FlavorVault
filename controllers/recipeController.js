@@ -20,9 +20,9 @@ const addRecipe = async (req, res, next) => {
     const {error} = validate(req.body);
     if(error) return res.status(422).send(error.details[0].message);
     let recipe = await new Recipe({
-        Title: req.body.title,
-        Ingredients: req.body.ingredients,
-        Instructions: req.body.instructions
+        Title: req.body.Title,
+        Ingredients: req.body.Ingredients,
+        Instructions: req.body.Instructions
 
     })
     recipe = await recipe.save();

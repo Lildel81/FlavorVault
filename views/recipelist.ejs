@@ -22,9 +22,9 @@
                 <% if(recipes.length > 0) { %>
                     <% for(let recipe of recipes) { %>
                     <tr>
-                        <th scope="row"><%= recipe.recipeName %></th>
-                        <td><%= recipe.ingredients %></td>
-                        <td><%= recipe.instructions %></td>
+                        <th scope="row"><%= recipe.Title %></th>
+                        <td><%= recipe.Ingredients %></td>
+                        <td><%= recipe.Instructions %></td>
                         <td>
                             <a href="/updateRecipe/<%= recipe._id %>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                             <a href="/deleteRecipe/<%= recipe._id %>" class="btn btn-sm btn-danger"><i class="fa fa-edit"></i></a>
