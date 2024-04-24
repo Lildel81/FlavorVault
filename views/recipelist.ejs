@@ -13,21 +13,21 @@
         <table class = "table table-hover">
             <thread class="table-dark">
                 <tr>
+                    <th scope="col"></th>
                     <th scope="col">Name</th>
-                    <th scope="col">Ingredients</th>
-                    <th scope="col">Instructions</th>
+                    <th scope="col">Link</th>
                 </tr>
             </thread>
             <tbody>
                 <% if(recipes.length > 0) { %>
                     <% for(let recipe of recipes) { %>
                     <tr>
-                        <th scope="row"><%= recipe.Title %></th>
-                        <td><%= recipe.Ingredients %></td>
-                        <td><%= recipe.Instructions %></td>
+                        <th scope="row"><img src="<%- recipe.Image %>" width="20%" height="20%"></th>
+                        <td><%- recipe.Title %></td>
+                        <td><a href='<%- recipe.url %>'>View Recipe</a></td>
                         <td>
-                            <a href="/updateRecipe/<%= recipe._id %>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                            <a href="/deleteRecipe/<%= recipe._id %>" class="btn btn-sm btn-danger"><i class="fa fa-edit"></i></a>
+                            <a href="/updateRecipe/<%= recipe._id %>" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Update</a>
+                            <a href="/deleteRecipe/<%= recipe._id %>" class="btn btn-sm btn-danger"><i class="fa fa-edit"></i>Delete</a>
                         </td>
                     </tr>
                     <% } %>

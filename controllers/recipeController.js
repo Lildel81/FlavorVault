@@ -22,7 +22,9 @@ const addRecipe = async (req, res, next) => {
     let recipe = await new Recipe({
         Title: req.body.Title,
         Ingredients: req.body.Ingredients,
-        Instructions: req.body.Instructions
+        Instructions: req.body.Instructions,
+        Image: req.body.Image,
+        url: req.body.url
 
     })
     recipe = await recipe.save();

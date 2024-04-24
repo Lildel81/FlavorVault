@@ -4,7 +4,7 @@ const Joi = require('joi');
 const recipeSchema = new mongoose.Schema({
     Title:{
         type: String,
-        required: true,
+        required: true
     },
 
     Ingredients:{
@@ -15,7 +15,16 @@ const recipeSchema = new mongoose.Schema({
     Instructions:{
         type:[String],
         required: true
+    },
+    Image:{
+        type: String,
+        required: true
+    },
+    url:{
+        type: String,
+        required: true
     }
+
 
 });
 
@@ -25,7 +34,9 @@ const validateRecipe = (recipe) => {
     const schema = Joi.object({
         Title: Joi.string().required(),
         Ingredients: Joi.string().required(),
-        Instructions: Joi.string().required()
+        Instructions: Joi.string().required(),
+        Image: Joi.string().required(),
+        url: Joi.string().required()
     });
     
     const validationResult = schema.validate(recipe);
