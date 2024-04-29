@@ -59,11 +59,38 @@ const data = req.body;
       url: data.url
 
   }, {new: true});
-  if (!recipe) return res.status(404).send("REcipe with given ID not found");
+  if (!recipe) return res.status(404).send("Recipe with given ID not found");
 
 
   res.redirect('/');
 }
+
+const getDeleteRecipeView = async (req, res, next) =>{
+  try{
+    const id = req.params.id;
+    const onerecipe = await Recipe.findById(id).exec();
+    res.render('deleteRecipe', {
+      recipe: onerecipe
+    });
+
+} catch (error) {
+  res.status(400).send(error.message);
+}
+}
+
+const deleteRecipe = async (req, res, next) => {
+  try{
+    const id = req.params.id;
+    const recipe = await Recipe.findByIdAndDelete(id);
+    if(!recipe) return res.status(404).send('Recipe with given id not found');
+    res.redirect('/');
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+
+  
+}
+
 
 let fetch;
 
@@ -263,7 +290,9 @@ module.exports = {
     findRecipe,
     getResult,
     getUpdateRecipeView,
-    updateRecipe
+    updateRecipe,
+    getDeleteRecipeView,
+    deleteRecipe
 
     
     
