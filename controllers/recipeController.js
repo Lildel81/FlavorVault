@@ -22,6 +22,7 @@ const addRecipe = async (req, res, next) => {
     let recipe = await new Recipe({
         Title: req.body.Title,
         Ingredients: req.body.Ingredients,
+        DBIngredients: req.body.DBIngredients,
         Instructions: req.body.Instructions,
         Image: req.body.Image,
         url: req.body.url
@@ -29,6 +30,39 @@ const addRecipe = async (req, res, next) => {
     })
     recipe = await recipe.save();
     res.redirect('/');
+}
+
+const getUpdateRecipeView = async (req, res, next) => {
+  try{
+      const id = req.params.id;
+      const onerecipe = await Recipe.findById(id).exec();
+      res.render('updateRecipe', {
+        recipe: onerecipe
+      });
+
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+
+}
+const updateRecipe = async(req, res, next) => {
+  const {error} = validate(req.body);
+  if (error) return res.status(422).send(error.details[0].message);
+const id = req.params.id;
+const data = req.body;
+  let recipe = await Recipe.findByIdAndUpdate(id, {
+      Title: data.Title,
+      Ingredients: data.Ingredients,
+      Instructions: data.Instructions,
+      DBIngredients: data.DBIngredients,
+      Image: data.Image,
+      url: data.url
+
+  }, {new: true});
+  if (!recipe) return res.status(404).send("REcipe with given ID not found");
+
+
+  res.redirect('/');
 }
 
 let fetch;
@@ -82,8 +116,13 @@ const getResult = async (req, res) =>{
         let i = 0;
         let ingredientsString = ings[1];
         let instructionString = inst[i];
+        let dataBaseIngredients = ings[1];
         for(i = 1; i < ings.length; i++){
           ingredientsString = ingredientsString + "<br>" + ings[i];
+
+        }
+        for(i = 1; i < ings.length; i++){
+          dataBaseIngredients = dataBaseIngredients + "\n" + ings[i];
 
         }
         for (i = 1; i < inst.length; i++){
@@ -97,6 +136,7 @@ const getResult = async (req, res) =>{
           URL: parsedData.results[0].sourceUrl,
           Summary: parsedData.results[0].summary,
           Ingredients: ingredientsString,
+          DBIngredients: dataBaseIngredients,
           Instructions: instructionString
           }
 
@@ -168,9 +208,6 @@ const getIngs = async (res, recipeID) => {
         }
 }
 
-    
-
-
 const getInstructions = async (id) => {
    
     const requestOptions = {
@@ -224,7 +261,10 @@ module.exports = {
     getAddRecipeView,
     addRecipe,
     findRecipe,
-    getResult
+    getResult,
+    getUpdateRecipeView,
+    updateRecipe
+
     
     
     

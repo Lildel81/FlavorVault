@@ -17,13 +17,21 @@
                 </div>
             </div>
         </form>
-        
-            
-           
-        
-        
+   
      </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve the value of the searchQuery cookie
+        const searchQuery = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('searchQuery='))
+            .split('=')[1];
+        
+        // Set the value of the input field to the searchQuery
+        document.getElementById('searchRecipe').value = searchQuery || '';
+    });
+</script>
 
 
 

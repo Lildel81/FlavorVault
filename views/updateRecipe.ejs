@@ -1,0 +1,46 @@
+<div class="card">
+
+    <div class="card-header">
+        <h4 class="font-weight-bold">Update Recipe </h4>
+    </div>
+    <div class="card-body">
+        <div class="card-header">
+        <form action="/updateRecipe/<%= recipe._id %>" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="Recipe Title">Recipe Title</label>
+                        <input type="text" class="form-control" value="<%= recipe.Title %>" name="Title" placeholder="Enter Recipe Title..." id="Title">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="ingredients">Ingredients</label>
+                        <textarea class="form-control" name="DBIngredients" id="DBIngredients" rows="10">
+                            <%- recipe.DBIngredients %>
+                        </textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="col-form-label" for="Instructions">Instructions</label>
+                        <textarea class="form-control" name="Instructions" id="Instcutions" rows="7">
+                            <%= recipe.Instructions %>
+                        </textarea>
+                    </div>
+                </div>
+                
+          <input type="hidden" name="Ingredients" value="<%= recipe.Ingredients %>">
+          <input type="hidden" name="Image" value="<%= recipe.Image %>">
+          <input type="hidden" name="url" value="<%= recipe.url %>">
+            </div class="">
+                <button type="submit" class="btn btn-success">Update</button>
+                <a href="/" class="btn btn-light">Cancel</a>
+            </div>
+        
+        
+            
+        </form>
+        </div>
+    </div>
+</div>

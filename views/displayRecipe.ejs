@@ -1,7 +1,5 @@
 <div class="card">
-  <% let Title = dataToSend.Title; %>
-  <% let Ingredients = dataToSend.Ingredients %>
-  <% let Instructions = dataToSend.Instructions %>
+  
   <div class="card-header">
     <h1 class="front-weight-bold">Recipe Results</h1>
   </div>
@@ -39,6 +37,7 @@
           <input type="hidden" name="Title" value="<%= dataToSend.Title %>">
           <input type="hidden" name="Ingredients" value="<%= dataToSend.Ingredients %>">
           <input type="hidden" name="Instructions" value="<%= dataToSend.Instructions %>">
+          <input type="hidden" name="DBIngredients" value="<%= dataToSend.DBIngredients %>">
           <input type="hidden" name="Image" value="<%= dataToSend.Image %>">
           <input type="hidden" name="url" value="<%= dataToSend.URL %>">
             

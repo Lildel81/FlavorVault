@@ -11,7 +11,10 @@ const recipeSchema = new mongoose.Schema({
         type:[String],
         required: true
     },
-
+    DBIngredients:{
+        type:String,
+        required: true
+    },
     Instructions:{
         type:[String],
         required: true
@@ -35,6 +38,7 @@ const validateRecipe = (recipe) => {
         Title: Joi.string().required(),
         Ingredients: Joi.string().required(),
         Instructions: Joi.string().required(),
+        DBIngredients: Joi.string().required(),
         Image: Joi.string().required(),
         url: Joi.string().required()
     });
