@@ -1,0 +1,52 @@
+<div class="card">
+  
+  <div class="card-header">
+    <h1 class="front-weight-bold">Recipe Results</h1>
+  </div>
+  <div class="card-body">
+    <div class="card-header">
+      <h2 class="front-weight-bold">
+        <%= dataToSend.Title || 'Untitled Recipe' %>
+      </h2>
+      <img
+        src="<%= dataToSend.Image %>"
+        alt="<%= recipeData.Title %> recipe image"
+      />
+      <div>
+        <a href="<%= dataToSend.URL %>">Visit Recipe Here</a>
+
+        <br />
+        <br />
+        <br />
+        <h4><strong>Summary of Recipe</strong></h4>
+        <p><%- dataToSend.Summary %></p>
+
+        <h4><strong>Ingredients</strong></h4>
+        <%- dataToSend.Ingredients %>
+        <br />
+        <br />
+        <h4><strong>Instructions</strong></h4>
+        <%= dataToSend.Instructions %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <form action="/addCustomer" method="post">
+      <div class="row">
+        <div class="col-6">
+          <input type="hidden" name="Title" value="<%= dataToSend.Title %>">
+          <input type="hidden" name="Ingredients" value="<%= dataToSend.Ingredients %>">
+          <input type="hidden" name="Instructions" value="<%= dataToSend.Instructions %>">
+          <input type="hidden" name="DBIngredients" value="<%= dataToSend.DBIngredients %>">
+          <input type="hidden" name="Image" value="<%= dataToSend.Image %>">
+          <input type="hidden" name="url" value="<%= dataToSend.URL %>">
+            
+            <button type="submit" class="btn btn-success float-right"><i class="fa fa-plus mr-1"></i>Add To My Collection</button>
+            
+            
+        </div>
+    </div>
+</form>
+    </form>
+  </div>
+</div>

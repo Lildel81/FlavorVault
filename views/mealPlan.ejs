@@ -1,0 +1,134 @@
+<div class="split-container">
+    <div class="split-left">
+        <div class="calendar">
+            <h3 class = "month"></h3>
+            <ul class="dates">
+                <!-- Dates of the month will be populated here -->
+            </ul>
+        </div>
+        <div class="under-container">
+            <h4 class="today2"></h4>
+            <button class="meal-button" onclick="gotoPage2()">Breakfast</button>
+            <button class="meal-button" onclick="gotoPage2()">Lunch</button>
+            <button class="meal-button" onclick="gotoPage2()">Dinner</button>
+
+            <script>
+                function gotoPage2()
+                {
+                    window.location.href= "mealPlan.html";
+                }
+
+                function displayCurrentDate() {
+                    const today = new Date();
+                    const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+                    const formattedDate = today.toLocaleDateString('en-US', dateOptions);
+                    document.querySelector('.today2').textContent = formattedDate;
+                }
+
+                // Call on page load to display the date
+                displayCurrentDate()
+
+            </script>
+        </div>
+    </div>
+
+
+<script>
+    // Function to generate calendar
+    function generateCalendar() {
+        const datesList = document.querySelector('.dates');
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        const monthElement = document.querySelector('.month');
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        // Clear existing dates
+        datesList.innerHTML = '';
+
+        // Populate month
+        monthElement.textContent = monthNames[currentMonth] + ' ' + currentYear;
+
+        // Populate with the dates of the month
+        for (let date = 1; date <= daysInMonth; date++) {
+            const dateCell = document.createElement('li');
+            dateCell.textContent = date;
+            dateCell.classList.add('date');
+
+            // Highlight today's date
+            if (date === now.getDate() && currentMonth === now.getMonth() && currentYear === now.getFullYear()) {
+                dateCell.classList.add('today');
+            }
+
+            datesList.appendChild(dateCell);
+        }
+    }
+
+    let currentDate = new Date(); // Store the initial current date
+
+    // Call the function on page load
+    generateCalendar();
+</script>
+
+
+
+    <!--RIGHT CONTAINER Your HTML content goes here -->
+    <div class="split-right">
+        <h2>Meal Plan for the Week</h2>
+        <div class="weekly-plan">
+            <!-- JavaScript will populate the dates here -->
+        </div>
+
+        <script>
+            // Function to get the current dates of the week
+            function getCurrentWeekDates() {
+                const currentDate = new Date();
+                const currentDayOfWeek = currentDate.getDay(); // 0 for Sunday, 1 for Monday, etc.
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+                // Calculate the start date of the week (Sunday)
+                const startDate = new Date(currentDate);
+                startDate.setDate(currentDate.getDate() - currentDayOfWeek);
+
+                // Create an array to store the dates of the week
+                const weekDates = [];
+
+                // Populate the weekDates array with the dates of the week
+                for (let i = 0; i < 7; i++) {
+                    const date = new Date(startDate);
+                    date.setDate(startDate.getDate() + i);
+                    weekDates.push(date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
+                }
+
+                return weekDates;
+            }
+
+            // Function to display the current dates of the week
+            function displayCurrentWeekDates() {
+                const weekDates = getCurrentWeekDates();
+                const weeklyPlan = document.querySelector('.weekly-plan');
+
+                // Clear any existing content
+                weeklyPlan.innerHTML = '';
+
+                // Display the dates of the week
+                weekDates.forEach(date => {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.classList.add('day');
+                    dayDiv.textContent = date;
+
+                    // Highlight today's date
+                    if (date === new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })) {
+                        dayDiv.classList.add('today');
+                    }
+
+                    weeklyPlan.appendChild(dayDiv);
+                });
+            }
+
+            // Call the function to display the current dates of the week
+            displayCurrentWeekDates();
+        </script>
+    </div>
+</div>

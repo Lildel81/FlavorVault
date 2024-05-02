@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlavorVault - Unlock Your Inner Chef</title>
+    <!--<link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">-->
+    <link rel="stylesheet" href="http://localhost:8080/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost:8080/css/OpeningPage.css">
+    <link rel="stylesheet" href="http://localhost:8080/css/Mealplan_page2.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
+    
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">FlavorVault</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/recipeList">My Recipes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mealPlan">My MealPlan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/addRecipe">Search</a>
+          </li>
+          <!--<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Additional Sites</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="www.spoonacular.com">Spoonacular</a>
+              <a class="dropdown-item" href="www.postman.com">Postman API Helper</a>
+              <a class="dropdown-item" href="www.Bootstrap.com">Bootstrap</a>
+              <a class="dropdown-item" href="www.trello.com">Trello</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="www.github.com/Lildel81">GitHub</a>
+            </div>
+          </li>-->
+        </ul>
+        
+        <form action="/searchRecipe" id="search_recipe_api" method="get">
+          
+                  <div class="form-group">
+                      
+                      <input type="text" class="form-control" name="searchRecipe" placeholder="Search" id="searchRecipe">
+                  
+                  <button type="submit" class="btn btn-success float-right" href="displayRecipe.ejs">Search</button>
+                  </div>
+                  
+              
+          
+      </form>
+      </div>
+    </div>
+  </nav>
+
+     
+
+      
+ 
+   
+
+      <div class="container"><%- body %></div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>

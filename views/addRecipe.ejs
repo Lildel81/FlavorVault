@@ -1,0 +1,37 @@
+<div class = 'card'>
+    <%let recipeData = {}; %>
+    <div class = card-header>
+        <h4 class='front-weight-bold'>Search for a Recipe</h4>
+    </div>
+    <div class="card-body">
+        <form action="/searchRecipe" id="search_recipe_api" method="get">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="searchRecipe">Recipe Search</label>
+                        <input type="text" class="form-control" name="searchRecipe" placeholder="Search for a recipe..." id="searchRecipe">
+                    </div>
+                    <button type="submit" class="btn btn-success float-right" href="displayRecipe.ejs"><i class="fa fa-plus mr-1"></i>Search</button>
+                    
+                    
+                </div>
+            </div>
+        </form>
+   
+     </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve the value of the searchQuery cookie
+        const searchQuery = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('searchQuery='))
+            .split('=')[1];
+        
+        // Set the value of the input field to the searchQuery
+        document.getElementById('searchRecipe').value = searchQuery || '';
+    });
+</script>
+
+
+
