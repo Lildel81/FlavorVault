@@ -59,11 +59,11 @@
     align-items: center;
 }
 .search-bar {
-    position: relative; / Make the search bar a positioning context /
+    position: relative; 
 padding: 10px 40px 10px 5px;
     border-radius: 65px;
     width: 156px;
-    margin-right: 20px; / Adjust the margin-right to create space for the icon /
+    margin-right: 20px; 
 }
 
 .dateHeader
@@ -97,5 +97,5 @@ padding: 10px 40px 10px 5px;
 {
     position: absolute;
     height: 5000px;
-    width: 2700px
-}
+    width: 100%;
+}/* edited the css to make the mealplan page 2 fit the page */
